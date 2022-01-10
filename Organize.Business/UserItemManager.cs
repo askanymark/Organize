@@ -8,12 +8,32 @@ namespace Organize.Business;
 public class UserItemManager : IUserItemManager
 {
     private IItemDataAccess _dataAccess;
-    
+
     public UserItemManager(IItemDataAccess dataAccess)
     {
         _dataAccess = dataAccess;
     }
-    
+
+    public async Task RetrieveAllUserItemsOfUserAndSetToUserAsync(User user)
+    {
+        var items = new List<BaseItem>();
+        var textItems = await _dataAccess.GetItemsAsync<TextItem>(user.Id);
+        var urlItems = await _dataAccess.GetItemsAsync<UrlItem>(user.Id);
+        var parentItems = (await _dataAccess.GetItemsAsync<ParentItem>(user.Id)).ToList();
+
+        foreach (var parent in parentItems)
+        {
+            var childItems = await _dataAccess.GetItemsAsync<ChildItem>(parent.Id);
+            parent.ChildItems = new ObservableCollection<ChildItem>(childItems);
+        }
+
+        items.AddRange(textItems);
+        items.AddRange(urlItems);
+        items.AddRange(parentItems);
+
+        user.Items = new ObservableCollection<BaseItem>(items.OrderBy(i => i.Position));
+    }
+
     public async Task<ChildItem> CreateNewChildItemAndAddItToParentAsync(ParentItem parentItem)
     {
         var childItem = new ChildItem

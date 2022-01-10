@@ -14,12 +14,17 @@ public partial class ItemsList : ComponentBase, IDisposable
     [Inject] private ItemEditService _editService { get; set; }
     
     [Inject] private NavigationManager _navigationManager { get; set; }
+    
+    [Inject] private IUserItemManager _itemManager { get; set; }
 
     protected ObservableCollection<BaseItem> _items { get; set; } = new();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
+        await base.OnInitializedAsync();
+
+        await _itemManager.RetrieveAllUserItemsOfUserAndSetToUserAsync(_userService.currentUser);
+        
         _items = _userService.currentUser.Items;
         _items.CollectionChanged += HandleUserItemsCollectionChanged;
     }
