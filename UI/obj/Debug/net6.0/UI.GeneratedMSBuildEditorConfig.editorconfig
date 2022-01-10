@@ -1,0 +1,28 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows,browser
+build_property.RootNamespace = UI
+build_property.RootNamespace = UI
+build_property.ProjectDir = /Users/goat/Projects/Organize_Start/UI/
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/goat/Projects/Organize_Start/UI
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/goat/Projects/Organize_Start/UI/Dropdown/Dropdown.razor]
+build_metadata.AdditionalFiles.TargetPath = RHJvcGRvd24vRHJvcGRvd24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/goat/Projects/Organize_Start/UI/Validation/ValidationInput.razor]
+build_metadata.AdditionalFiles.TargetPath = VmFsaWRhdGlvbi9WYWxpZGF0aW9uSW5wdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/goat/Projects/Organize_Start/UI/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 

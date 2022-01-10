@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "kAAGkPyLg4VkyCoDGfo8gweDZTbvRfOYF2PrYxPVZgQ=",
+  "Source": "GeneralUI",
+  "BasePath": "_content/GeneralUI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "GeneralUI/wwwroot",
+      "Source": "GeneralUI",
+      "ContentRoot": "/Users/goat/Projects/Organize_Start/GeneralUI/wwwroot/",
+      "BasePath": "_content/GeneralUI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/goat/Projects/Organize_Start/GeneralUI/wwwroot/css/styles.css",
+      "SourceId": "GeneralUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/goat/Projects/Organize_Start/GeneralUI/wwwroot/",
+      "BasePath": "_content/GeneralUI",
+      "RelativePath": "css/styles.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/styles.css"
+    }
+  ]
+}

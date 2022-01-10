@@ -1,0 +1,34 @@
+@page "/signup"
+@inherits SignUpBase
+@using Organize.Shared.Enums
+
+<div class="sign-form">
+    <EditForm EditContext="EditContext" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator/>
+
+        <div class="sign-validation">
+            <ValidationInput @bind-Value="User.UserName" placeholder="Username" Error="@GetError(() => User.UserName)"/>
+        </div>
+        <div class="sign-validation">
+            <ValidationInput @bind-Value="User.Password" type="password" placeholder="Password" Error="@GetError(() => User.Password)"/>
+        </div>
+        <div class="sign-validation">
+            <ValidationInput @bind-Value="User.FirstName" placeholder="First name" Error="@GetError(() => User.FirstName)"/>
+        </div>
+        <div class="sign-validation">
+            <ValidationInput @bind-Value="User.LastName" placeholder="Last name" Error="@GetError(() => User.LastName)"/>
+        </div>
+        <div class="sign-validation">
+            <ValidationInput @bind-Value="User.PhoneNumber" type="tel" placeholder="Phone number" Error="@GetError(() => User.PhoneNumber)"/>
+        </div>
+        <div class="sign-validation">
+            <Dropdown T="Gender" @bind-SelectedItem="@selectedGender" SelectableItems="genderOptions"></Dropdown>
+        </div>
+
+        <button class="sign-button btn btn-primary" type="submit">Sign Up</button>
+    </EditForm>
+
+    <div class="signup">
+        <a href="/signin">Sign In</a>
+    </div>
+</div>

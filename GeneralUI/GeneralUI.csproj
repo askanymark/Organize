@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="Validation\ValidationInput.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Organize.Shared\Organize.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="DropdownControl\ValidationDropdown.razor" />
+    </ItemGroup>
+
+</Project>

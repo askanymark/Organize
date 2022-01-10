@@ -1,0 +1,28 @@
+<div class="item-edit-info">
+    <div class="item-edit-info-text">Type: @Item.Type.ToString()</div>
+    <div class="item-edit-info-count">@Item.Position/@TotalNumber</div>
+</div>
+
+<label for="title">Title</label>
+<input id="title" type="text" class="item-edit-input" @bind-value="@Item.Title" @bind-value:event="oninput"/>
+
+@switch (Item)
+{
+    case TextItem textItem:
+        <label for="subtitle">Subtitle</label>
+        <input id="subtitle" class="item-edit-input" @bind-value="@textItem.SubTitle" @bind-value:event="oninput"/>
+
+        <label for="details">Details</label>
+        <textarea id="details" type="text" class="item-edit-input" @bind-value="@textItem.Detail" @bind-value:event="oninput"></textarea>
+        break;
+
+    case UrlItem urlItem:
+        <label for="url">Url</label>
+        <input id="url" class="item-edit-input" @bind-value="@urlItem.Url" @bind-value:event="oninput"/>
+        <a class="orga-button" href="@urlItem.Url" target="_blank">Open</a>
+        break;
+
+    case ParentItem parentItem:
+        <ChildItemEdit ParentItem="parentItem"></ChildItemEdit>
+        break;
+}

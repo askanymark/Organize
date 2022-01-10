@@ -1,0 +1,22 @@
+@page "/items"
+@page "/items/{Type}/{Id:int}"
+@using Organize.Shared.Enums
+<div class="items-container">
+    <div class="items-list-container">
+        <ItemsList></ItemsList>
+    </div>
+
+    @if (_showEdit)
+    {
+        <div class="item-edit-container">
+            <ItemEdit></ItemEdit>
+        </div>
+    }
+</div>
+
+<div class="item-add-box fixed-bottom">
+    <div class="dropdown item-add-input">
+        <Dropdown T="ItemType" SelectableItems="_dropdownTypes" SelectedItemChanged="@(args => _selectedType = args)"/>
+    </div>
+    <button class="orga-button" @onclick="AddNewAsync" disabled="@(_selectedType == null)">Add</button>
+</div>

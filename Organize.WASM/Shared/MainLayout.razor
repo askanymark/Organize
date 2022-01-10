@@ -1,0 +1,29 @@
+@inherits LayoutComponentBase
+
+<nav class="navbar navbar-light justify-content-between fixed-top">
+    <a class="navbar-brand" href="/Items">
+        <img alt="Logo" src="/images/blazor.png" width="30" height="30" class="d-inline-block align-top"/>
+        @if (_useShortNavText)
+        {
+            @:Hello
+        }
+        else
+        {
+            @:Hello @_userService.currentUser ! Organize your life right
+        }
+    </a>
+    <form class="form-inline">
+        <NavLink href="settings" ActiveClass="active-nav">
+            <button class="btn btn-outline-success my-2 my-sm-0">Settings</button>
+        </NavLink>
+        <NavLink href="about" ActiveClass="active-nav">
+            <button class="btn btn-outline-success my-2 my-sm-0">About</button>
+        </NavLink>
+        <div class="btn btn-outline-success my-2 my-sm-0" @onclick="SignOut">Sign out</div>
+    </form>
+</nav>
+<div class="main">
+    <div class="content px-4">
+        @Body
+    </div>
+</div>

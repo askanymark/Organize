@@ -1,0 +1,16 @@
+/Users/goat/Projects/Organize_Start/UI/bin/Debug/net6.0/UI.staticwebassets.runtime.json
+/Users/goat/Projects/Organize_Start/UI/bin/Debug/net6.0/UI.deps.json
+/Users/goat/Projects/Organize_Start/UI/bin/Debug/net6.0/UI.dll
+/Users/goat/Projects/Organize_Start/UI/bin/Debug/net6.0/ref/UI.dll
+/Users/goat/Projects/Organize_Start/UI/bin/Debug/net6.0/UI.pdb
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/UI.csproj.AssemblyReference.cache
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/UI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/UI.AssemblyInfoInputs.cache
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/UI.AssemblyInfo.cs
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/UI.csproj.CoreCompileInputs.cache
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/staticwebassets.build.json
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/staticwebassets.development.json
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/scopedcss/bundle/UI.styles.css
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/UI.dll
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/ref/UI.dll
+/Users/goat/Projects/Organize_Start/UI/obj/Debug/net6.0/UI.pdb
