@@ -1,0 +1,122 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/goat/Projects/Organize_Start/Organize.InMemoryStorage/Organize.InMemoryStorage.csproj": {}
+  },
+  "projects": {
+    "/Users/goat/Projects/Organize_Start/Organize.InMemoryStorage/Organize.InMemoryStorage.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/goat/Projects/Organize_Start/Organize.InMemoryStorage/Organize.InMemoryStorage.csproj",
+        "projectName": "Organize.InMemoryStorage",
+        "projectPath": "/Users/goat/Projects/Organize_Start/Organize.InMemoryStorage/Organize.InMemoryStorage.csproj",
+        "packagesPath": "/Users/goat/.nuget/packages/",
+        "outputPath": "/Users/goat/Projects/Organize_Start/Organize.InMemoryStorage/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/goat/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/goat/Projects/Organize_Start/Organize.Shared/Organize.Shared.csproj": {
+                "projectPath": "/Users/goat/Projects/Organize_Start/Organize.Shared/Organize.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/goat/Projects/Organize_Start/Organize.Shared/Organize.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/goat/Projects/Organize_Start/Organize.Shared/Organize.Shared.csproj",
+        "projectName": "Organize.Shared",
+        "projectPath": "/Users/goat/Projects/Organize_Start/Organize.Shared/Organize.Shared.csproj",
+        "packagesPath": "/Users/goat/.nuget/packages/",
+        "outputPath": "/Users/goat/Projects/Organize_Start/Organize.Shared/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/goat/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

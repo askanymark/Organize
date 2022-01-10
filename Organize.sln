@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{E97B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Organize.TestFake", "Organize.TestFake\Organize.TestFake.csproj", "{39BBE93D-9E0D-431F-9872-4229DC25FBB1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Organize.InMemoryStorage", "Organize.InMemoryStorage\Organize.InMemoryStorage.csproj", "{C8D120BC-7CC7-4560-B1C5-7C0D48DA12D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{39BBE93D-9E0D-431F-9872-4229DC25FBB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39BBE93D-9E0D-431F-9872-4229DC25FBB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39BBE93D-9E0D-431F-9872-4229DC25FBB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D120BC-7CC7-4560-B1C5-7C0D48DA12D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D120BC-7CC7-4560-B1C5-7C0D48DA12D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D120BC-7CC7-4560-B1C5-7C0D48DA12D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D120BC-7CC7-4560-B1C5-7C0D48DA12D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
