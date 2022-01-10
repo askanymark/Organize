@@ -7,6 +7,13 @@ namespace Organize.Business;
 
 public class UserItemManager : IUserItemManager
 {
+    private IItemDataAccess _dataAccess;
+    
+    public UserItemManager(IItemDataAccess dataAccess)
+    {
+        _dataAccess = dataAccess;
+    }
+    
     public async Task<ChildItem> CreateNewChildItemAndAddItToParentAsync(ParentItem parentItem)
     {
         var childItem = new ChildItem
@@ -15,9 +22,11 @@ public class UserItemManager : IUserItemManager
             Type = ItemType.Child
         };
 
+        await _dataAccess.InsertItemAsync(childItem);
+
         parentItem.ChildItems.Add(childItem);
 
-        return await Task.FromResult(childItem);
+        return childItem;
     }
 
     public async Task<BaseItem> CreateNewUserItemAndAddItToUserAsync(User user, ItemType type)
@@ -53,6 +62,8 @@ public class UserItemManager : IUserItemManager
             ParentId = user.Id
         };
 
-        return await Task.FromResult(item);
+        await _dataAccess.InsertItemAsync(item);
+
+        return item;
     }
 }
