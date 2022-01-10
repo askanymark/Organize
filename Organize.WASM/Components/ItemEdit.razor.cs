@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Timers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Organize.Business;
@@ -6,6 +7,7 @@ using Organize.Shared.Entities;
 using Organize.Shared.Enums;
 using Organize.Shared.Interfaces;
 using Organize.WASM.ItemEdit;
+using Timer = System.Timers.Timer;
 
 namespace Organize.WASM.Components;
 
@@ -17,6 +19,8 @@ public partial class ItemEdit : ComponentBase, IDisposable
 
     private int TotalNumber { get; set; }
 
+    private Timer _debounceTimer;
+
     [Inject] private IUserItemManager _itemManager { get; set; }
 
     [Inject] private NavigationManager _navigationManager { get; set; }
@@ -26,9 +30,18 @@ public partial class ItemEdit : ComponentBase, IDisposable
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        _debounceTimer = new Timer(500);
+        _debounceTimer.AutoReset = false;
+        _debounceTimer.Elapsed += HandleTimerElapsed
+            ;
         // _editService.EditItemChanged += HandleItemChanged;
         // Item = _editService.Item;
         SetDataFromUri();
+    }
+
+    private void HandleTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        _itemManager.UpdateAsync(Item);
     }
 
     private void SetDataFromUri()
@@ -62,7 +75,12 @@ public partial class ItemEdit : ComponentBase, IDisposable
 
     private async void HandleItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        await _itemManager.UpdateAsync(Item);
+        // await _itemManager.UpdateAsync(Item);
+        if (_debounceTimer != null)
+        {
+            _debounceTimer.Stop();
+            _debounceTimer.Start();
+        }
     }
 
     private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -78,9 +96,10 @@ public partial class ItemEdit : ComponentBase, IDisposable
     //     Item.PropertyChanged += HandleItemPropertyChanged;
     //     StateHasChanged();
     // }
-    
+
     public void Dispose()
     {
+        _debounceTimer?.Dispose();
         _navigationManager.LocationChanged -= HandleLocationChanged;
         Item.PropertyChanged -= HandleItemPropertyChanged;
     }
