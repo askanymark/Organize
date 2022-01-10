@@ -5,23 +5,34 @@ namespace Organize.DataAccess;
 
 public class ItemDataAccess : IItemDataAccess
 {
-    public Task<IEnumerable<T>> GetItemsAsync<T>(int parentId) where T : BaseItem
+    private IPersistenceService _persistenceService;
+    
+    public ItemDataAccess(IPersistenceService persistenceService)
     {
-        throw new NotImplementedException();
+        _persistenceService = persistenceService;
+    }
+    
+    public async Task<IEnumerable<T>> GetItemsAsync<T>(int parentId) where T : BaseItem
+    {
+        return await _persistenceService.GetAsync<T>(i => i.ParentId == parentId);
     }
 
-    public Task InsertItemAsync<T>(T item) where T : BaseItem
+    public async Task InsertItemAsync<T>(T item) where T : BaseItem
     {
-        throw new NotImplementedException();
+        var id = await _persistenceService.InsertAsync<T>(item);
+        item.Id = id;
     }
 
-    public Task UpdateItemAsync<T>(T item) where T : BaseItem
+    public async Task UpdateItemAsync<T>(T item) where T : BaseItem
     {
-        throw new NotImplementedException();
+        await _persistenceService.UpdateAsync<T>(item);
     }
 
-    public Task DeleteItemsAsync<T>(IEnumerable<T> items) where T : BaseItem
+    public async Task DeleteItemsAsync<T>(IEnumerable<T> items) where T : BaseItem
     {
-        throw new NotImplementedException();
+        foreach (var item in items)
+        {
+            await _persistenceService.DeleteAsync<T>(item);
+        }
     }
 }
