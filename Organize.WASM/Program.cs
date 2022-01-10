@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Organize.Business;
+using Organize.DataAccess;
+using Organize.InMemoryStorage;
 using Organize.Shared.Interfaces;
 using Organize.TestFake;
 using Organize.WASM;
@@ -16,12 +18,23 @@ builder.Services.AddScoped<IUserService, UserService>();
 // builder.Services.AddSingleton<IUserManager, UserManager>(); // Registration for dependency injection container
 builder.Services.AddScoped<IUserManager, UserManagerFake>();
 builder.Services.AddScoped<IUserItemManager, UserItemManager>();
+builder.Services.AddScoped<IItemDataAccess, ItemDataAccess>();
+builder.Services.AddScoped<IPersistenceService, InMemoryStorage>();
 builder.Services.AddScoped<ItemEditService>();
 
 var host = builder.Build();
 
+var persistenceService = host.Services.GetRequiredService<IPersistenceService>();
+await persistenceService.InitAsync();
+
 var userService = host.Services.GetRequiredService<IUserService>();
-TestData.CreateTestUser();
-userService.currentUser = TestData.testUser;
+var itemManager = host.Services.GetRequiredService<IUserItemManager>();
+
+if (persistenceService is InMemoryStorage)
+{
+    TestData.CreateTestUser(itemManager);
+    userService.currentUser = TestData.testUser;
+}
+
 
 await host.RunAsync();

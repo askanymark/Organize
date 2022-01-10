@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using Organize.Shared.Entities;
 using Organize.Shared.Enums;
+using Organize.Shared.Interfaces;
 
 namespace Organize.TestFake;
 
@@ -8,8 +9,12 @@ public class TestData
 {
     public static User testUser { get; set; }
 
-    public static void CreateTestUser()
+    public static void CreateTestUser(IUserItemManager itemManager = null)
     {
+        TextItem textItem = null;
+        UrlItem urlItem = null;
+        ParentItem parentItem = null;
+        ChildItem childItem = null;
         var user = new User
         {
             Id = 1,
@@ -21,53 +26,76 @@ public class TestData
             Items = new ObservableCollection<BaseItem>()
         };
 
-        var textItem = new TextItem
+        if (itemManager != null)
         {
-            ParentId = user.Id,
-            Id = 1,
-            Title = "Buy cheese",
-            SubTitle = "Edam slices & mature cheddar",
-            Detail = "Slices from Morrisons and cheddar from Cathedral City",
-            Type = ItemType.Text,
-            Position = 1,
-            IsDone = false
-        };
-
-        var urlItem = new UrlItem
+            textItem = (TextItem) itemManager.CreateNewUserItemAndAddItToUserAsync(user, ItemType.Text).Result;
+        }
+        else
         {
-            ParentId = user.Id,
-            Id = 2,
-            Title = "Buy this beer mug",
-            Url = "https://s3-us-west-2.amazonaws.com/craftbeerdotcom/wp-content/uploads/fall-beer-stein.jpg",
-            Position = 2,
-            Type = ItemType.Url,
-            IsDone = false,
-        };
+            textItem = new TextItem();
+            user.Items.Add(textItem);
+        }
 
-        var parentItem = new ParentItem
+        textItem.ParentId = user.Id;
+        textItem.Id = 1;
+        textItem.Title = "Buy cheese";
+        textItem.SubTitle = "Edam slices & mature cheddar";
+        textItem.Detail = "Slices from Morrisons and cheddar from, Cathedral City";
+        textItem.Type = ItemType.Text;
+        textItem.Position = 1;
+        textItem.IsDone = false;
+
+        if (itemManager != null)
         {
-            ParentId = user.Id,
-            Id = 3,
-            Position = 3,
-            Title = "Make birthday present",
-            Type = ItemType.Parent,
-            IsDone = false,
-            ChildItems = new ObservableCollection<ChildItem>()
-        };
-
-        var childItem = new ChildItem
+            urlItem = (UrlItem) itemManager.CreateNewUserItemAndAddItToUserAsync(user, ItemType.Url).Result;
+        }
+        else
         {
-            ParentId = parentItem.Id,
-            Id = 4,
-            Position = 1,
-            Title = "Cut"
-        };
-        
-        parentItem.ChildItems.Add(childItem);
+            urlItem = new UrlItem();
+            user.Items.Add(urlItem);
+        }
 
-        user.Items.Add(textItem);
-        user.Items.Add(urlItem);
-        user.Items.Add(parentItem);
+        urlItem.ParentId = user.Id;
+        urlItem.Id = 2;
+        urlItem.Title = "But this beer mug";
+        urlItem.Url = "https://s3-us-west-2.amazonaws.com/craftbeerdotcom/wp-content/uploads/fall-beer-stein.jpg";
+        urlItem.Position = 2;
+        urlItem.Type = ItemType.Url;
+        urlItem.IsDone = false;
+
+        if (itemManager != null)
+        {
+            parentItem = (ParentItem) itemManager.CreateNewUserItemAndAddItToUserAsync(user, ItemType.Parent).Result;
+        }
+        else
+        {
+            parentItem = new ParentItem();
+            user.Items.Add(parentItem);
+        }
+
+        parentItem.ParentId = user.Id;
+        parentItem.Id = 3;
+        parentItem.Position = 3;
+        parentItem.Title = "Make birthday present";
+        parentItem.Type = ItemType.Parent;
+        parentItem.IsDone = false;
+        parentItem.ChildItems = new ObservableCollection<ChildItem>();
+
+        if (itemManager != null)
+        {
+            childItem = (ChildItem) itemManager.CreateNewChildItemAndAddItToParentAsync(parentItem).Result;
+            user.Items.Clear();
+        }
+        else
+        {
+            childItem = new ChildItem();
+            parentItem.ChildItems.Add(childItem);
+        }
+
+        childItem.ParentId = parentItem.Id;
+        childItem.Id = 4;
+        childItem.Position = 1;
+        childItem.Title = "Cut";
 
         testUser = user;
     }
