@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Organize.Business;
@@ -16,11 +17,11 @@ public partial class ItemEdit : ComponentBase, IDisposable
 
     private int TotalNumber { get; set; }
 
-    [Inject]
-    private NavigationManager _navigationManager { get; set; }
-    
-    [Inject]
-    private IUserService _userService { get; set; }
+    [Inject] private IUserItemManager _itemManager { get; set; }
+
+    [Inject] private NavigationManager _navigationManager { get; set; }
+
+    [Inject] private IUserService _userService { get; set; }
 
     protected override void OnInitialized()
     {
@@ -32,6 +33,8 @@ public partial class ItemEdit : ComponentBase, IDisposable
 
     private void SetDataFromUri()
     {
+        if (Item != null) Item.PropertyChanged -= HandleItemPropertyChanged;
+
         var uri = _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
 
         var segments = uri.Segments.Length;
@@ -50,10 +53,16 @@ public partial class ItemEdit : ComponentBase, IDisposable
             else
             {
                 Item = userItem;
+                Item.PropertyChanged += HandleItemPropertyChanged;
                 _navigationManager.LocationChanged += HandleLocationChanged;
                 StateHasChanged();
             }
         }
+    }
+
+    private async void HandleItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        await _itemManager.UpdateAsync(Item);
     }
 
     private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -61,14 +70,18 @@ public partial class ItemEdit : ComponentBase, IDisposable
         SetDataFromUri();
     }
 
-
     // private void HandleItemChanged(object? sender, ItemEditEventArgs e)
     // {
+    //     if (Item != null) Item.PropertyChanged -= HandleItemPropertyChanged;
+    //     
     //     Item = e.Item;
+    //     Item.PropertyChanged += HandleItemPropertyChanged;
     //     StateHasChanged();
     // }
+    
     public void Dispose()
     {
         _navigationManager.LocationChanged -= HandleLocationChanged;
+        Item.PropertyChanged -= HandleItemPropertyChanged;
     }
 }

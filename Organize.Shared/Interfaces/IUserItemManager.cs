@@ -10,4 +10,6 @@ public interface IUserItemManager
     Task<ChildItem> CreateNewChildItemAndAddItToParentAsync(ParentItem parentItem);
 
     Task<BaseItem> CreateNewUserItemAndAddItToUserAsync(User user, ItemType type);
+
+    Task UpdateAsync<T>(T item) where T : BaseItem;
 }

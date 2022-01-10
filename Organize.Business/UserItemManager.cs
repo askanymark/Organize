@@ -86,4 +86,23 @@ public class UserItemManager : IUserItemManager
 
         return item;
     }
+
+    public async Task UpdateAsync<T>(T item) where T : BaseItem
+    {
+        switch (item)
+        {
+            case TextItem textItem:
+                await _dataAccess.UpdateItemAsync(textItem);
+                break;
+            case UrlItem urlItem:
+                await _dataAccess.UpdateItemAsync(urlItem);
+                break;
+            case ParentItem parentItem:
+                await _dataAccess.UpdateItemAsync(parentItem);
+                break;
+            case ChildItem childItem:
+                await _dataAccess.UpdateItemAsync(childItem);
+                break;
+        }
+    }
 }
