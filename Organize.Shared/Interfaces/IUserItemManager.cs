@@ -12,4 +12,6 @@ public interface IUserItemManager
     Task<BaseItem> CreateNewUserItemAndAddItToUserAsync(User user, ItemType type);
 
     Task UpdateAsync<T>(T item) where T : BaseItem;
+
+    Task DeleteAllDoneAsync(User user);
 }

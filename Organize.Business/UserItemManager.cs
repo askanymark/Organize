@@ -105,4 +105,31 @@ public class UserItemManager : IUserItemManager
                 break;
         }
     }
+
+    public async Task DeleteAllDoneAsync(User user)
+    {
+        var doneItems = user.Items.Where(i => i.IsDone).ToList();
+        var doneParentItem = doneItems.OfType<ParentItem>().ToList();
+        var doneChildItems = doneParentItem.SelectMany(i => i.ChildItems).ToList();
+
+        await _dataAccess.DeleteItemsAsync(doneChildItems);
+        await _dataAccess.DeleteItemsAsync(doneParentItem);
+        await _dataAccess.DeleteItemsAsync(doneItems.OfType<TextItem>());
+        await _dataAccess.DeleteItemsAsync(doneItems.OfType<UrlItem>());
+
+        foreach (var doneItem in doneItems)
+        {
+            user.Items.Remove(doneItem);
+        }
+
+        var orderedByPosition = user.Items.OrderBy(i => i.Position);
+        var position = 1;
+
+        foreach (var item in orderedByPosition)
+        {
+            item.Position = position;
+            position++;
+            await UpdateAsync(item);
+        }
+    }
 }
