@@ -10,10 +10,15 @@ public class IndexedDB : IPersistenceService
 {
     private readonly IJSRuntime _jsRuntime;
     private readonly string _objectIdentifier = "organizedIndexedDb";
+    private readonly JsonSerializerSettings _settings;
 
     public IndexedDB(IJSRuntime jsRuntime)
     {
         _jsRuntime = jsRuntime;
+        _settings = new JsonSerializerSettings
+        {
+            ContractResolver = new SimplePropertyContractResolver()
+        };
     }
 
     public async Task<IEnumerable<T>> GetAsync<T>(Expression<Func<T, bool>> whereExpression) where T : BaseEntity
@@ -27,7 +32,7 @@ public class IndexedDB : IPersistenceService
     public async Task<int> InsertAsync<T>(T entity) where T : BaseEntity
     {
         var tableName = typeof(T).Name;
-        var serializedEntity = JsonConvert.SerializeObject(entity);
+        var serializedEntity = JsonConvert.SerializeObject(entity, _settings);
         var id = await _jsRuntime.InvokeAsync<int>($"{_objectIdentifier}.addAsync", tableName, serializedEntity);
 
         return id;
@@ -36,7 +41,7 @@ public class IndexedDB : IPersistenceService
     public async Task UpdateAsync<T>(T entity) where T : BaseEntity
     {
         var tableName = typeof(T).Name;
-        var serializedEntity = JsonConvert.SerializeObject(entity);
+        var serializedEntity = JsonConvert.SerializeObject(entity, _settings);
 
         await _jsRuntime.InvokeVoidAsync($"{_objectIdentifier}.putAsync", tableName, serializedEntity, entity.Id);
     }
