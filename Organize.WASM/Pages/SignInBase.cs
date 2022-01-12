@@ -9,6 +9,8 @@ namespace Organize.WASM.Pages;
 
 public class SignInBase : ComponentBase
 {
+    [Inject] private IUserService _userService { get; set; }
+    
     [Inject] private NavigationManager _navigationManager { get; set; }
 
     [Inject] private IUserManager _userManager { get; set; }
@@ -33,6 +35,7 @@ public class SignInBase : ComponentBase
 
         if (user != null)
         {
+            _userService.currentUser = user;
             _navigationManager.NavigateTo("items");
         }
     }

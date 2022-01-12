@@ -16,6 +16,7 @@
         <ProjectReference Include="..\GeneralUI\GeneralUI.csproj" />
         <ProjectReference Include="..\Organize.Business\Organize.Business.csproj" />
         <ProjectReference Include="..\Organize.DataAccess\Organize.DataAccess.csproj" />
+        <ProjectReference Include="..\Organize.IndexedDB\Organize.IndexedDB.csproj" />
         <ProjectReference Include="..\Organize.InMemoryStorage\Organize.InMemoryStorage.csproj" />
         <ProjectReference Include="..\Organize.Shared\Organize.Shared.csproj" />
         <ProjectReference Include="..\Organize.TestFake\Organize.TestFake.csproj" />
