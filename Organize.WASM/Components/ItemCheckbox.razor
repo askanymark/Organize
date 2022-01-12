@@ -1,5 +1,5 @@
 <div id="itemCheckbox">
-    <div class="outer-container" @onclick="@(() => Item.IsDone = !Item.IsDone)">
+    <div class="outer-container" @onclick="@ChangeIsDone">
         @if (Item.IsDone)
         {
             <div class="inner-container @ColorPrefix-background"></div>
