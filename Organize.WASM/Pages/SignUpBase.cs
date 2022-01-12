@@ -2,18 +2,19 @@ using System.Linq.Expressions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Primitives;
 using Organize.Shared.Entities;
 using Organize.Shared.Enums;
+using Organize.Shared.Interfaces;
 using UI.Dropdown;
 
 namespace Organize.WASM.Pages;
 
 public class SignUpBase : ComponentBase
 {
-    [Inject]
-    private NavigationManager _navigationManager { get; set; }
-    
+    [Inject] private IUserManager _userManager { get; set; }
+
+    [Inject] private NavigationManager _navigationManager { get; set; }
+
     protected User User { get; set; } = new();
 
     protected EditContext? EditContext { get; set; }
@@ -47,7 +48,7 @@ public class SignUpBase : ComponentBase
         genderOptions.Add(other);
 
         selectedGender = female;
-        
+
         ParseUri();
     }
 
@@ -66,9 +67,9 @@ public class SignUpBase : ComponentBase
         }
     }
 
-    protected void OnValidSubmit()
+    protected async void OnValidSubmit()
     {
-        // TODO create user
+        await _userManager.RegisterAsync(User);
         _navigationManager.NavigateTo("signin");
     }
 }
